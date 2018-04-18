@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'travel_buddy/css/bootstrap.min.css' %}">
+    <title>Belt Retake - Login</title>
+</head>
+<body>
+    <div id="wrapper" class="container">
+        <h1>Welcome to the Exam Retake!</h1>
+        <!-- Errors section -->
+        <div id="errors" >
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <!-- Register Form -->
+        <div class="row">
+            <div id="register" class="col-5">
+                <h3>Register</h3>
+                <form action="/register" method="post">
+                    {% csrf_token %}
+                    <input class="form-control-sm" type="text" name="name" placeholder="Name">
+                    <input class="form-control-sm" type="text" name="username" placeholder="Username">
+                    <input class="form-control-sm" type="password" name="password" placeholder="Password">
+                    <input class="form-control-sm" type="password" name="pwd_conf" placeholder="confirm password...">
+                    <input type="submit" value="Register" class="btn">
+                </form>
+            </div>
+            <!-- Login Form -->
+            <div id="login" class="col-5">
+                <h3>Login</h3>
+                <form action="/login" method="post">
+                    {% csrf_token %}
+                    <input class="form-control-sm" type="text" name="username" placeholder="username">
+                    <input class="form-control-sm" type="password" name="password" placeholder="password">
+                    <input type="submit" value="Login" class="btn">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

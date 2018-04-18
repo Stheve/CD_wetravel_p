@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'travel_buddy/css/bootstrap.min.css' %}">
+    <title>Travels - View Destination</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="row mb-4">
+            N<h1 class="col-8">View Destination</h1>
+            <a class="col-1 btn btn-primary mt-3" href="/travels">Back</a>
+            <a class="col-1 btn btn-primary mt-3 ml-2" href="/logout">Logout!</a>
+        </div>
+        <div class="row">
+            <div class="col-4 ml-3">
+                <h2>{{ destination.destination }}</h2>
+                <h4 class="ml-3">Planned by: {{ destination.created_by.name }}</h4>
+                <h4 class="ml-3">Description: {{ destination.details }}</h4>
+                <h4 class="ml-3">From: {{ destination.start_date|date:"N d o" }}</h4>
+                <h4 class="ml-3">To: {{ destination.end_date|date:"N d o" }}</h4>
+            </div>
+            <div class="col-5">
+                <h2>Users that joined this trip:</h2>
+                {% for user in joined_it %}
+                    <h4 class="ml-3">{{ user.name }}</h4>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

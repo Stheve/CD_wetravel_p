@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'travel_buddy/css/bootstrap.min.css' %}">
+    <title>Belt Retake - Index</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="row mb-3">
+            <h1 class="col-8" >Hello {{ request.session.logged.username }}! ({{ request.session.logged.name }})</h1>
+            <a class="col-1 btn btn-primary mt-3" href="/travels/new">New Travel Plan</a>
+            <a class="col-1 btn btn-primary mt-3 ml-2" href="/logout">Logout!</a>
+        </div>
+        <div class="container row">
+            <h2>Your Trips Scheduled</h2>
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <th>Destination</th>
+                    <th>Starts</th>
+                    <th>Ends</th>
+                    <th>Plan Details</th>
+                </thead>
+                <tbody>
+                    <!-- {{ logged_plans }} -->
+                    {% for plan in logged_plans %}
+                    <tr>
+                        <td>
+                            <a href="/travels/destination/{{ plan.id }}">{{ plan.destination }}</a>
+                        </td>
+                        <td>{{ plan.start_date|date:"N d o" }}</td>
+                        <td>{{ plan.end_date|date:"N d o" }}</td>
+                        <td>{{ plan.details }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="container row">
+            <h2>Other Users Trips Scheduled</h2>
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <th>Created by</th>
+                    <th>Destination</th>
+                    <th>Starts</th>
+                    <th>Ends</th>
+                    <th>Join?</th>
+                </thead>
+                <tbody>
+                    <!-- {{ logged_plans }} -->
+                    {% for plan in others_plans %}
+                    <tr>
+                        <td>{{ plan.created_by.name }}</td>
+                        <td>
+                            <a href="/travels/destination/{{ plan.id }}">{{ plan.destination }}</a>
+                        </td>
+                        <td>{{ plan.start_date|date:"N d o" }}</td>
+                        <td>{{ plan.end_date|date:"N d o" }}</td>
+                        <td>
+                            <a href="/travels/join/{{ plan.id }}">Join!</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

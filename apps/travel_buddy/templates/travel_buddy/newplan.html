@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'travel_buddy/css/bootstrap.min.css' %}">
+    <title>Travels - New Plan</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="row mb-3">
+            N<h1 class="col-8" >Add a new Trip</h1>
+            <a class="col-1 btn btn-primary mt-3" href="/travels">Home</a>
+            <a class="col-1 btn btn-primary mt-3 ml-2" href="/logout">Logout!</a>
+        </div>
+         <!-- Errors section -->
+         <div id="errors" >
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <form action="/travels/add" method="post" class="ml-3">
+                    {% csrf_token %}
+                    <input class="form-control-lg row" type="text" name="destination" placeholder="Your Destination">
+                    <input class="form-control-lg row" type="text" name="details" placeholder="Details...">
+                    Departure Date: <input class="form-control-lg row" type="date" name="start_date" placeholder="Departure Date">
+                    Return Date: <input class="form-control-lg row" type="date" name="end_date" placeholder="Return Date">
+                    <input type="submit" class="btn btn-primary mt-4" value="Add">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
